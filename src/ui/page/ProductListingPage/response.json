@@ -1,0 +1,86 @@
+[
+  {
+    "pid": 1,
+    "name": "Beef Mince - Grain Fed | Australia | 300g",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefMince-GrainFed_Australia_300g_Frozen_550x.webp?v=1754465689",
+    "price": 14.70,
+    "hasStock": false
+  },
+  {
+    "pid": 2,
+    "name": "Beef Sirloin Steak - Grass Fed | Australia | 250g",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefSirloinSteak-GrassFed_Australia_250g_Frozen_550x.webp?v=1754465608",
+    "price": 22.80,
+    "hasStock": true
+  },
+  {
+    "pid": 3,
+    "name": "Chicken Breast - Cage Free | Australia | 400g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/ChickenBreast-CageFree_Australia_400g_Frozen_550x.webp?v=1754466088",
+    "price": 16.25,
+    "hasStock": true
+  },
+  {
+    "pid": 4,
+    "name": "Chicken Drumettes - Free Range | Australia | 400g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/ChickenDrumettes-FreeRange_Australia_400g_Frozen_550x.webp?v=1754466034",
+    "price": 11.50,
+    "hasStock": true
+  },
+  {
+    "pid": 5,
+    "name": "Pork Mince - Free Range | Australia | 500g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/PorkMince-FreeRange_Australia_500g_Frozen_800x.webp?v=1754466596",
+    "price": 18.00,
+    "hasStock": true
+  },
+  {
+    "pid": 6,
+    "name": "Pork Tenderloin - Free Range | Australia | 480g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/PorkTenderloin-FreeRange_Australia_480g_Frozen_550x.webp?v=1754466587",
+    "price": 21.00,
+    "hasStock": true
+  },
+  {
+    "pid": 7,
+    "name": "Pork Collar Chops - Free Range | Australia | 500g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/PorkCollarChops-FreeRange_Australia_500g_Frozen_800x.webp?v=1754466577",
+    "price": 23.00,
+    "hasStock": true
+  },
+  {
+    "pid": 8,
+    "name": "Pork Collar/Shoulder - Free Range | Australia | 500g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/PorkCollar_Shoulder-FreeRange_Australia_500g_Frozen_800x.webp?v=1754466572",
+    "price": 22.50,
+    "hasStock": true
+  },
+  {
+    "pid": 9,
+    "name": "Chicken Thigh Fillets - Cage Free | Australia | 400g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/ChickenThighFillets-CageFree_Australia_400g_Frozen_550x.png?v=1754628844",
+    "price": 16.75,
+    "hasStock": true
+  },
+  {
+    "pid": 10,
+    "name": "Chicken Tenders (Crumbed) - Cage Free | Australia | 400g | Frozen",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/ChickenTenders_Crumbed_-CageFree_Australia_400g_Frozen_550x.webp?v=1754466058",
+    "price": 16.50,
+    "hasStock": true
+  },
+  {
+    "pid": 11,
+    "name": "Beef Stir Fry Strips - Grass Fed | Australia | 300g",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefStirFryStrips-GrassFed_Australia_300g_Frozen_550x.webp?v=1754465624",
+    "price": 16.00,
+    "hasStock": true
+  },
+  {
+    "pid": 12,
+    "name": "Beef Sirloin Steak - Grass Fed | Australia | 250g",
+    "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefSirloinSteak-GrassFed_Australia_250g_Frozen_550x.webp?v=1754465608",
+    "price": 22.80,
+    "hasStock": true
+  }
+]

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.text-primary{
+    color: #304d6e ;
+    font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/*!* Force yellow color for rating stars *!*/
+/*.mask-star-2 {*/
+/*    background-color: #fbbf24 !important; !* yellow-400 *!*/
+/*}*/
