@@ -6,6 +6,10 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
+import {serviceInit} from "./authService/FirebaseAuthService.ts";
+
+// initialize firebase app
+serviceInit();
 
 // Create a new router instance
 const router = createRouter({ routeTree })

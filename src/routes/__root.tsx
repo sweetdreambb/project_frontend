@@ -1,27 +1,23 @@
-// import * as React from 'react'
-// import { Outlet, createRootRoute } from '@tanstack/react-router'
-//
-// export const Route = createRootRoute({
-//   component: RootComponent,
-// })
-//
-// function RootComponent() {
-//   return (
-//     <React.Fragment>
-//       <div>Hello "__root"!</div>
-//       <Outlet />
-//     </React.Fragment>
-//   )
-// }
-
 import {createRootRoute, Outlet} from "@tanstack/react-router";
+import {useEffect, useState} from "react";
+import type {UserData} from "../data/user/user.type.ts";
+import {onAuthStateChanged} from "../authService/FirebaseAuthService.ts";
+import {LoginUserContext} from "../context/LoginUserContext.tsx";
 
-export const Route=createRootRoute(
+export const Route = createRootRoute(
   {component: RootComponent,}
 );
 
-function RootComponent(){
-  return(
-    <Outlet/>
+function RootComponent() {
+  const [loginUser, setLoginUser] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(setLoginUser)
+  }, []);
+
+  return (
+    <LoginUserContext.Provider value={loginUser}>
+      <Outlet/>
+    </LoginUserContext.Provider>
   )
 }

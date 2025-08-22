@@ -4,12 +4,17 @@ import {
   faCartShopping,
   faCow,
   faDrumstickBite,
-  faPiggyBank,
+  faPiggyBank, faRightFromBracket,
   faUser
 } from "@fortawesome/free-solid-svg-icons";
 import MyMeatShopIcon from "../../MyMeatShopIcon";
+import {useContext} from "react";
+import {LoginUserContext} from "../../../../context/LoginUserContext.tsx";
 
 export default function NavbarStart() {
+
+  const loginUser = useContext(LoginUserContext);
+
   return (
     <div className="navbar-start">
       {/*Mobile dropdown menu*/}
@@ -41,6 +46,9 @@ export default function NavbarStart() {
           className="menu menu-md dropdown-content bg-base-100 rounded-box
            z-50 mt-3 w-52 p-2 shadow text-primary">
           {/*change to z-50 instead of z-[1]*/}
+          <li className="flex justify-start font-bold italic px-2 py-2">
+            Hello! {loginUser &&loginUser.email}
+          </li>
           <li>
             <Link to="/">Products</Link>
             <ul className="p-2">
@@ -65,12 +73,27 @@ export default function NavbarStart() {
             </ul>
           </li>
           <li>
-            <Link to="/login">
-              <FontAwesomeIcon icon={faUser}/>
-              Login
-            </Link>
+            {
+              loginUser
+                ?(
+                  <Link
+                    to="/login"
+                    className="text-white mx-1 bg-[#304d6e]"
+                  >
+                    <FontAwesomeIcon icon={faRightFromBracket}/>
+                    Logout
+                  </Link>
+                ):(
+
+                  <Link to="/login" className="text-primary mx-1">
+                    <FontAwesomeIcon icon={faUser}/>
+                    Login
+                  </Link>
+
+                )
+            }
           </li>
-          <li>
+          <li className="mt-2">
             <Link to="/shoppingcart">
               <FontAwesomeIcon icon={faCartShopping}/>
               Shopping Cart

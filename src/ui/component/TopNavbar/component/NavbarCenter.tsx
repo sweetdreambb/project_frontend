@@ -1,11 +1,19 @@
 import {Link} from "@tanstack/react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCow, faDrumstickBite, faPiggyBank, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCow, faDrumstickBite, faPiggyBank, faRightFromBracket, faUser} from "@fortawesome/free-solid-svg-icons";
+import {useContext} from "react";
+import {LoginUserContext} from "../../../../context/LoginUserContext.tsx";
 
-export default function NavbarCenter(){
+export default function NavbarCenter() {
+
+  const loginUser = useContext(LoginUserContext);
+
   return (
-    <div className="navbar-center hidden lg:flex">
-      <ul className="menu menu-horizontal px-1 text-primary">
+    <div className="navbar-center hidden  lg:flex">
+      <ul className="menu menu-horizontal flex items-center px-1 text-primary">
+        <li className="flex items-center font-bold italic px-2 pointer-events-none hover:bg-transparent">
+          Hello! {loginUser && <span>{loginUser.email}</span>}
+        </li>
         {/*Products dropdown*/}
         <li className="dropdown">
           {/*removed detail tag, Trigger*/}
@@ -39,10 +47,25 @@ export default function NavbarCenter(){
 
         </li>
         <li>
-          <Link to="/login" className="text-primary mx-1">
-            <FontAwesomeIcon icon={faUser}/>
-            Login
-          </Link>
+        {
+          loginUser
+          ?(
+              <Link
+                to="/login"
+                className="text-white mx-1 bg-[#304d6e]"
+              >
+                <FontAwesomeIcon icon={faRightFromBracket}/>
+                Logout
+              </Link>
+            ):(
+
+              <Link to="/login" className="text-primary mx-1">
+                <FontAwesomeIcon icon={faUser}/>
+                Login
+              </Link>
+
+            )
+        }
         </li>
       </ul>
     </div>
