@@ -9,7 +9,7 @@ export const Route = createRootRoute(
 );
 
 function RootComponent() {
-  const [loginUser, setLoginUser] = useState<UserData | null>(null);
+  const [loginUser, setLoginUser] = useState<UserData | null | undefined>(undefined);
 
   useEffect(() => {
     onAuthStateChanged(setLoginUser)

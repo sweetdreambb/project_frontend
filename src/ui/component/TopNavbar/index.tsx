@@ -1,8 +1,6 @@
 import NavbarStart from "./component/NavbarStart.tsx";
 import NavbarCenter from "./component/NavbarCenter.tsx";
 import NavbarEnd from "./component/NavbarEnd.tsx";
-import {useContext} from "react";
-
 
 export default function TopNavbar() {
 

@@ -1,12 +1,16 @@
 import TopNavbar from "../../component/TopNavbar";
 import Announcebar from "../../component/Announcebar";
 import FooterBar from "../../component/FooterBar";
-import {type FormEvent, useState} from "react";
-import {signInWithEmailAndPassword} from "../../../authService/FirebaseAuthService.ts";
-import {useRouter} from "@tanstack/react-router";
+import {type FormEvent, useContext, useEffect, useState} from "react";
+import {signInWithEmailAndPassword, signInWithGoogle} from "../../../authService/FirebaseAuthService.ts";
+import {useNavigate, useRouter} from "@tanstack/react-router";
+import {LoginUserContext} from "../../../context/LoginUserContext.tsx";
+import {GoogleLoginButton} from "react-social-login-buttons";
 
 export default function LoginPage() {
   const router = useRouter();
+  const navigate = useNavigate({from: "/login"});
+  const loginUser = useContext(LoginUserContext);
 
   const [isLoginFailed, setIsLoginFailed] = useState(false);
 
@@ -26,6 +30,12 @@ export default function LoginPage() {
       setIsLoginFailed(true);
     }
   }
+
+  useEffect(() => {
+    if (loginUser){
+      navigate({to:"/"});
+    }
+  }, [loginUser]);
 
   return (
     <div>
@@ -74,6 +84,8 @@ export default function LoginPage() {
           >
             Login
           </button>
+          <div className="divider">OR</div>
+          <GoogleLoginButton onClick={signInWithGoogle} align={"center"} style={{color: '#304d6e'}}/>
         </form>
       </div>
       <FooterBar/>
