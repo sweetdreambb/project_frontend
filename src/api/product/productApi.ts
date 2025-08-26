@@ -14,3 +14,8 @@ export async function getProductByPid(pid: string){
   const response = await axios.get<ProductDto>(`${baseUrl}/public/products/${pid}`);
   return response.data;
 }
+
+export async function getProductsByCategory(category:string) {
+  const response = await axios.get<GetAllProductDto[]>(`${baseUrl}/public/products/category/${category}`);
+  return response.data;
+}

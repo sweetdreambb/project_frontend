@@ -9,14 +9,64 @@ interface Props {
   quantity: number;
   handleQuantityMinusOne: () => void;
   handleQuantityPlusOne: () => void;
+  handlePutCartItem: () => void; // Add this line
+  isAddingToCart: boolean;
+  isSuccess: boolean;
 }
 
 export default function ProductDetailContent({
                                                productDto,
                                                quantity,
                                                handleQuantityMinusOne,
-                                               handleQuantityPlusOne
+                                               handleQuantityPlusOne,
+                                               handlePutCartItem,
+                                               isAddingToCart,
+                                               isSuccess
                                              }: Props) {
+
+  const renderAddToCartBtn = () => (
+    productDto.stock <= 0
+      ? (
+        <button
+          className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
+          style={{backgroundColor: '#304d6e', opacity: 0.5}}
+        >
+          Sold Out!
+        </button>
+      ) : isAddingToCart
+        ? (
+          <button
+            className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
+            style={{backgroundColor: '#304d6e',}}
+          >
+            <Link to="/shoppingcart">
+              Processing...
+            </Link>
+          </button>
+        ) : isSuccess
+        ?(
+            <button
+              className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
+              style={{backgroundColor: '#304d6e',}}
+            >
+              <Link to="/shoppingcart">
+                Added to Cart!
+              </Link>
+            </button>
+          ):
+        (
+          <button
+            className="btn btn-block text-white text-base lg:text-lg rounded-lg"
+            style={{backgroundColor: '#304d6e',}}
+            onClick={handlePutCartItem}
+          >
+            <Link to="/shoppingcart">
+              Add to cart
+            </Link>
+          </button>
+        )
+  )
+
   return (
     <div className="hero bg-base-200 min-h-full py-5 lg:py-10 px-4 lg:px-10">
       <div className="hero-content flex-col lg:flex-row">
@@ -31,7 +81,7 @@ export default function ProductDetailContent({
 
             {productDto.description}
           </p>
-          {productDto.stock>0
+          {productDto.stock > 0
             ? (
               <StockAvailableTag/>
             ) : (
@@ -43,30 +93,7 @@ export default function ProductDetailContent({
             handleQuantityMinusOne={handleQuantityMinusOne}
             handleQuantityPlusOne={handleQuantityPlusOne}
           />
-          {
-            productDto.stock <= 0
-            ? (
-
-                <button
-                  className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
-                  style={{backgroundColor: '#304d6e', opacity: 0.5}}
-                >
-
-                  Add to cart
-
-                </button>
-
-              ):(
-                <button
-                  className="btn btn-block text-white text-base lg:text-lg rounded-lg"
-                  style={{backgroundColor: '#304d6e',}}
-                >
-                  <Link to="/shoppingcart">
-                    Add to cart
-                  </Link>
-                </button>
-              )
-          }
+          {renderAddToCartBtn()}
         </div>
       </div>
     </div>

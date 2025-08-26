@@ -1,14 +1,22 @@
 import CartItemTableRow from "./CartItemTableRow.tsx";
+import type {GetCartItemDto} from "../../../../data/cart/cartItem.type.ts";
 
-export default function CartItemTable(){
+interface Props{
+  getCartItemDtoList: GetCartItemDto[];
+  estTotal: number;
+}
+
+export default function CartItemTable({getCartItemDtoList, estTotal}:Props){
+
+
   return(
     <div className="overflow-x-auto text-primary">
       <table className="table">
 
         <tbody>
         {
-          Array.from({length:10}).map(()=>
-            <CartItemTableRow/>
+          getCartItemDtoList.map((Dto)=>
+            <CartItemTableRow getCartItemDto={Dto}/>
           )
         }
 
@@ -19,12 +27,11 @@ export default function CartItemTable(){
 
           <th></th>
           <th className="text-right text-black text-lg">Estimated total:</th>
-          <th className="text-right font-bold text-black text-lg">$200.00</th>
+          <th className="text-right font-bold text-black text-lg">${estTotal.toLocaleString()}</th>
           <th></th>
         </tr>
         </tfoot>
       </table>
-
 
     </div>
   );

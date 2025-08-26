@@ -2,8 +2,17 @@ import StockAvailableTag from "../../../component/StockAvailableTag";
 import QuantitySelector from "../../../component/QuantitySelector";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import type {GetCartItemDto} from "../../../../data/cart/cartItem.type.ts";
+import StockOutTag from "../../../component/StockOutTag";
 
-export default function CartItemTableRow(){
+interface Props{
+  getCartItemDto: GetCartItemDto;
+}
+
+export default function CartItemTableRow({getCartItemDto}:Props){
+
+
+
   return (
     <tr>
 
@@ -12,24 +21,28 @@ export default function CartItemTableRow(){
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
               <img
-                src="https://themeatclub.com.sg/cdn/shop/files/BeefSirloinSteak-GrassFed_Australia_250g_Frozen_550x.webp?v=1754465608"
+                src={getCartItemDto.imageUrl}
               />
             </div>
           </div>
           <div>
-            <div className="text-base">Chicken Tenders (Crumbed) - Cage Free | Australia | 400g | Frozen</div>
-            <StockAvailableTag/>
+            <div className="text-base">{getCartItemDto.name}</div>
+            {
+              getCartItemDto.stock>0
+              ?<StockAvailableTag/>
+                :<StockOutTag/>
+            }
           </div>
         </div>
       </td>
       <td>
         <QuantitySelector
-          quantity={1}
+          quantity={Math.min(getCartItemDto.cartQuantity, getCartItemDto.stock)}
           handleQuantityPlusOne={()=> {} }
           handleQuantityMinusOne={()=> {}}
         />
       </td>
-      <td className="text-right font-bold text-black">$100.00</td>
+      <td className="text-right font-bold text-black">${(getCartItemDto.price*getCartItemDto.cartQuantity).toLocaleString()}</td>
       <td>
         <FontAwesomeIcon icon={faTrashCan} />
       </td>

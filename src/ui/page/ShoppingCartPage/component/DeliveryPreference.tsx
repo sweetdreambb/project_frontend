@@ -1,7 +1,12 @@
 import {useState} from "react";
 
-export default function DeliveryPreference(){
+interface Props{
+  onDeliveryChange: (hasValidDelivery: boolean)=> void;
+}
+
+export default function DeliveryPreference({onDeliveryChange}:Props){
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   // Get tomorrow's date in YYYY-MM-DD format
   const getTomorrowDate = () => {
@@ -15,6 +20,19 @@ export default function DeliveryPreference(){
     endDate.setDate(endDate.getDate()+14);
     return endDate.toISOString().split('T')[0];
   }
+
+  // Notify parent when delivery preference changes
+  const handleDateChange = (date: string)=>{
+    setSelectedDate(date);
+    onDeliveryChange(Boolean(date && selectedTime));
+  }
+
+  const handleTimeChange = (time: string) => {
+    setSelectedTime(time);
+    onDeliveryChange(Boolean(selectedDate && time));
+  };
+
+
   return (
     <form className="fieldset bg-base-200 border-base-300 rounded-box w-xs border px-4 py-4 text-primary">
       <legend className="fieldset-legend text-primary font-bold">DELIVERY PREFERENCE:</legend>
@@ -23,18 +41,22 @@ export default function DeliveryPreference(){
       <input
         type="date"
         value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
+        onChange={(e) => handleDateChange(e.target.value)}
         className="input input-bordered w-full"
         placeholder="Pick a date"
         min={getTomorrowDate()}
         max={getEndDate()}
       />
 
-      <select defaultValue="17:00-20:00" className="select">
+      <select
+        value={selectedTime}
+        onChange={(e)=>handleTimeChange(e.target.value)}
+        className="select"
+      >
+        <option value="">Choose time slot</option>
         <option>10:00-13:00</option>
         <option>13:00-16:00</option>
         <option>17:00-20:00</option>
-
       </select>
     </form>
   );
