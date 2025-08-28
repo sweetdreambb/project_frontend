@@ -1,15 +1,33 @@
 import {Link, useNavigate} from "@tanstack/react-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCow, faDrumstickBite, faPiggyBank, faRightFromBracket, faUser} from "@fortawesome/free-solid-svg-icons";
+import {
+  faCow,
+  faDrumstickBite,
+  faPiggyBank,
+  faRightFromBracket,
+  faUser,
+  faUtensils
+} from "@fortawesome/free-solid-svg-icons";
 import {useContext, useRef} from "react";
 import {LoginUserContext} from "../../../../context/LoginUserContext.tsx";
 import {signOut} from "../../../../authService/FirebaseAuthService.ts";
 
-export default function NavbarCenter() {
+interface Props {
+  onCategoryChange: (category: string)=> void;
+}
+
+export default function NavbarCenter({onCategoryChange}:Props) {
 
   const loginUser = useContext(LoginUserContext);
   const navigate = useNavigate();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const categories = [
+    {key: "ALL", label: "ALL", icon: faUtensils},
+    {key: "Beef", label: "Beef", icon: faCow},
+    {key: "Chicken", label: "Chicken", icon: faDrumstickBite},
+    {key: "Pork", label: "Pork", icon: faPiggyBank}
+  ]
+
 
   const handleLogoutClick = () => {
     modalRef.current?.showModal();
@@ -63,25 +81,22 @@ export default function NavbarCenter() {
             tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-primary"
           >
-            <li>
-              <Link to="/category/Beef">
-                <FontAwesomeIcon icon={faCow} beat/>
-                {/*add removed style color #304d6e*/}
-                Beef
-              </Link>
-            </li>
-            <li>
-              <Link to="/category/Chicken">
-                <FontAwesomeIcon icon={faDrumstickBite} beat/>
-                Chicken
-              </Link>
-            </li>
-            <li>
-              <Link to="/category/Pork">
-                <FontAwesomeIcon icon={faPiggyBank} beat/>
-                Pork
-              </Link>
-            </li>
+            {
+              categories.map((category)=>(
+                <li key={category.key}>
+                  <button
+                  onClick={()=>onCategoryChange(category.key)}
+                  disabled={false}// You can add loading state here if needed
+                  >
+                    <FontAwesomeIcon
+                      icon={category.icon}
+                      beat
+                    />
+                    <span>{category.label}</span>
+                  </button>
+                </li>
+              ))
+            }
           </ul>
 
         </li>

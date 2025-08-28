@@ -5,19 +5,28 @@ import {
   faCow,
   faDrumstickBite,
   faPiggyBank, faRightFromBracket,
-  faUser
+  faUser, faUtensils
 } from "@fortawesome/free-solid-svg-icons";
 import MyMeatShopIcon from "../../MyMeatShopIcon";
 import {useContext, useRef} from "react";
 import {LoginUserContext} from "../../../../context/LoginUserContext.tsx";
 import {signOut} from "../../../../authService/FirebaseAuthService.ts";
 
-export default function NavbarStart() {
+interface Props {
+  onCategoryChange: (category: string)=> void;
+}
+
+export default function NavbarStart({onCategoryChange}:Props) {
 
   const loginUser = useContext(LoginUserContext);
-
   const navigate = useNavigate();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const categories = [
+    {key: "ALL", label: "ALL", icon: faUtensils},
+    {key: "Beef", label: "Beef", icon: faCow},
+    {key: "Chicken", label: "Chicken", icon: faDrumstickBite},
+    {key: "Pork", label: "Pork", icon: faPiggyBank}
+  ]
 
   const handleLogoutClick = () => {
     modalRef.current?.showModal();
@@ -92,24 +101,22 @@ export default function NavbarStart() {
           <li>
             <Link to="/">Products</Link>
             <ul className="p-2">
-              <li>
-                <Link to="/category/Beef">
-                  <FontAwesomeIcon icon={faCow} beat/>
-                  Beef
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/Chicken">
-                  <FontAwesomeIcon icon={faDrumstickBite} beat/>
-                  Chicken
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/Pork">
-                  <FontAwesomeIcon icon={faPiggyBank} beat/>
-                  Pork
-                </Link>
-              </li>
+              {
+                categories.map((category)=>(
+                  <li key={category.key}>
+                    <button
+                      onClick={()=>onCategoryChange(category.key)}
+                      disabled={false}// You can add loading state here if needed
+                    >
+                      <FontAwesomeIcon
+                        icon={category.icon}
+                        beat
+                      />
+                      <span>{category.label}</span>
+                    </button>
+                  </li>
+                ))
+              }
             </ul>
           </li>
           <li>

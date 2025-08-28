@@ -5,12 +5,16 @@ interface Props {
   quantity: number;
   handleQuantityMinusOne: () => void;
   handleQuantityPlusOne: () => void;
+  isLoading?: boolean;
+  stock: number
 }
 
 export default function QuantitySelector({
                                            quantity,
                                            handleQuantityMinusOne,
-                                           handleQuantityPlusOne
+                                           handleQuantityPlusOne,
+                                           isLoading = false,
+                                           stock
                                          }: Props) {
   return (
     <div
@@ -20,13 +24,19 @@ export default function QuantitySelector({
       <button
         className="btn btn-ghost btn-xs btn-square p-0 bg-base-100 text-primary text-base lg:text-lg"
         onClick={handleQuantityMinusOne}
+        disabled={isLoading || quantity == 1}
       >
         <FontAwesomeIcon icon={faCircleMinus}/>
       </button>
-      <p>{quantity}</p>
+      {
+        isLoading
+        ? <span className="loading loading-spinner loading-xs"></span>
+          : <p>{quantity}</p>
+      }
       <button
         className="btn btn-ghost  btn-xs btn-square p-0 bg-base-100 text-primary text-base lg:text-lg"
         onClick={handleQuantityPlusOne}
+        disabled={isLoading || quantity == stock}
       >
         <FontAwesomeIcon icon={faCirclePlus}/>
       </button>

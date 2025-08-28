@@ -1,8 +1,8 @@
-import QuantitySelector from "../../component/QuantitySelector";
+import QuantitySelector from "../../../component/QuantitySelector";
 import {Link} from "@tanstack/react-router";
-import type {ProductDto} from "../../../data/product/product.type.ts";
-import StockAvailableTag from "../../component/StockAvailableTag";
-import StockOutTag from "../../component/StockOutTag";
+import type {ProductDto} from "../../../../data/product/product.type.ts";
+import StockAvailableTag from "../../../component/StockAvailableTag";
+import StockOutTag from "../../../component/StockOutTag";
 
 interface Props {
   productDto: ProductDto;

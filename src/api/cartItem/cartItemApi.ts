@@ -19,3 +19,18 @@ export async function putCartItem(pid: number, quantity: number){
   )
   return response.data;
 }
+
+export async function patchCartItem(pid: number, quantity: number){
+  await axios.patch(
+    `${baseUrl}/cart/items/${pid}/${quantity}`,
+    undefined,
+    await getAuthConfig()
+  )
+}
+
+export async function deleteCartItem(pid:number){
+  await axios.delete(
+    `${baseUrl}/cart/items/${pid}`,
+    await getAuthConfig()
+  )
+}

@@ -5,4 +5,3 @@ export const Route = createFileRoute('/category/$category')({
   component: CategoryDetailPage,
 })
 
-

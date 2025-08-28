@@ -1,4 +1,3 @@
-import TopNavbar from "../../component/TopNavbar";
 import "cally";
 import DeliveryPreference from "./component/DeliveryPreference.tsx";
 import CartItemTable from "./component/CartItemTable.tsx";
@@ -29,6 +28,26 @@ export default function ShoppingCartPage() {
     }
   }
 
+  const handleQuantityChange = (pid: number, quantity: number) => {
+    setGetCartItemDtoList(
+      getCartItemDtoList?.map((dto) => {
+          if (dto.pid === pid) {
+            dto.cartQuantity = quantity
+          }
+          return dto;
+        }
+      )
+    )
+  }
+
+  const handleDelete = (pid:number)=>{
+    setGetCartItemDtoList(
+      getCartItemDtoList?.filter((dto)=>(
+        dto.pid!=pid
+      ))
+    )
+  }
+
   useEffect(() => {
     if (loginUser === null) {
       navigate({to: "/login"});
@@ -36,6 +55,8 @@ export default function ShoppingCartPage() {
       fetchUserCart();
     }
   }, [loginUser]);
+
+
 
   const calculateTotalSales =
     (cartItemList: GetCartItemDto[]) => {
@@ -46,7 +67,7 @@ export default function ShoppingCartPage() {
   const estTotal = getCartItemDtoList && calculateTotalSales(getCartItemDtoList);
   const balance = estTotal && (500 - estTotal);
 
-  const handleDeliveryChange = (hasValidDelivery:boolean)=>{
+  const handleDeliveryChange = (hasValidDelivery: boolean) => {
     setHasValidDelivery(hasValidDelivery);
   }
 
@@ -62,19 +83,21 @@ export default function ShoppingCartPage() {
     return (
       <>
         <CartItemTable
+          handleQuantityChange={handleQuantityChange}
           getCartItemDtoList={getCartItemDtoList}
           estTotal={calculateTotalSales(getCartItemDtoList)}
+          handleDelete={handleDelete}
         />
         {
           hasValidDelivery
-          ?(
+            ? (
               <button
                 className="btn btn-success mt-4 text-2xl w-full my-4 text-black"
                 type="submit"
               >
                 Checkout
               </button>
-            ):(
+            ) : (
               <button
                 className="btn btn-disabled mt-4 text-2xl w-full my-4 text-black"
               >
@@ -88,8 +111,6 @@ export default function ShoppingCartPage() {
 
   return (
     <div>
-      <TopNavbar/>
-
       <div className="flex justify-start px-10 py-8 bg-[#304d6e]">
         <h1 className="font-extrabold text-white text-xl">MY CART</h1>
         <div
