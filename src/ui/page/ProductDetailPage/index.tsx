@@ -1,7 +1,7 @@
 import TopNavbar from "../../component/TopNavbar";
 import Announcebar from "../../component/Announcebar";
 import FooterBar from "../../component/FooterBar";
-import Menu from "../../component/Menu";
+import Menu from "../ProductListingPage/component/Menu.tsx";
 import {useContext, useEffect, useState} from "react";
 import type {ProductDto} from "../../../data/product/product.type.ts";
 import ProductDetailContent from "./ProductDetailContent.tsx";

@@ -3,7 +3,7 @@ import Announcebar from "../../component/Announcebar";
 import Testimonial from "./component/Testimonial.tsx";
 import FooterBar from "../../component/FooterBar";
 import AllProductCardContainer from "./component/AllProductCardContainer.tsx";
-import Menu from "../../component/Menu";
+import Menu from "./component/Menu.tsx";
 import {useEffect, useState} from "react";
 import type {GetAllProductDto} from "../../../data/product/product.type.ts";
 import LoadingContainer from "../../component/LoadingContainer";
