@@ -6,8 +6,10 @@ import type {GetCartItemDto} from "../../../data/cart/cartItem.type.ts";
 import {useContext, useEffect, useState} from "react";
 import LoadingContainer from "../../component/LoadingContainer";
 import {LoginUserContext} from "../../../context/LoginUserContext.tsx";
-import {useNavigate} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
 import {getUserCart} from "../../../api/cartItem/cartItemApi.ts";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 
 export default function ShoppingCartPage() {
 
@@ -114,7 +116,10 @@ export default function ShoppingCartPage() {
       <div className="flex justify-start px-10 py-8 bg-[#304d6e]">
         <h1 className="font-extrabold text-white text-xl">MY CART</h1>
         <div
-          className="rounded-full bg-base-100 text-primary px-2 mx-2 font-bold"> {getCartItemDtoList && getCartItemDtoList.length}</div>
+          className="rounded-full bg-base-100 text-primary px-2 mx-2 font-bold"
+        >
+          {getCartItemDtoList && getCartItemDtoList.length}
+        </div>
       </div>
       <div className="flex justify-between px-10 pt-2">
         {
@@ -134,6 +139,12 @@ export default function ShoppingCartPage() {
             <progress className="progress progress-success w-full" value={Math.min(500, estTotal)} max="500"></progress>
         }
       </div>
+      <Link
+        to="/"
+        className="mx-10 pb-4 text-primary w-full flex justify-start items-center"
+      >
+        <FontAwesomeIcon icon={faAngleLeft} />Continue shopping
+      </Link>
 
       {/* Main content area with responsive layout */}
       <div className="flex flex-col lg:flex-row flex-1 mx-10">

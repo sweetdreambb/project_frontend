@@ -1,18 +1,17 @@
-import {useLocation, useParams} from "@tanstack/react-router";
-import TopNavbar from "../../component/TopNavbar";
-import Announcebar from "../../component/Announcebar";
+import CheckOutTable from "./component/CheckOutTable.tsx";
 
-export default function CheckoutPage(){
-  const params=useParams({from:"/checkout/$transactionId"});
-  const location=useLocation();
+export default function CheckoutPage() {
 
   return (
-    <div className="shopping-cart-container">
-      <Announcebar/>
-      <TopNavbar/>
-      <h1>Checkout Page!</h1>
-      <h2>TransactionId is {params.transactionId}</h2>
-      <h3>Pathname: {location.pathname}</h3>
+    <div>
+      <div className="flex justify-start px-10 py-8 bg-[#304d6e]">
+        <h1 className="font-thin text-white text-xl italic">Express checkout</h1>
+      </div>
+      <div className="flex flex-col lg:flex-row flex-1 justify-center">
+        <CheckOutTable/>
+
+      </div>
+
     </div>
   )
 }

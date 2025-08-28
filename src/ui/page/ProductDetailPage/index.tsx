@@ -1,15 +1,14 @@
-import TopNavbar from "../../component/TopNavbar";
 import Announcebar from "../../component/Announcebar";
 import FooterBar from "../../component/FooterBar";
-import Menu from "../../component/Menu";
 import {useContext, useEffect, useState} from "react";
-import type {GetAllProductDto, ProductDto} from "../../../data/product/product.type.ts";
+import type {ProductDto} from "../../../data/product/product.type.ts";
 import ProductDetailContent from "./component/ProductDetailContent.tsx";
 import LoadingContainer from "../../component/LoadingContainer";
 import {useNavigate, useParams} from "@tanstack/react-router";
-import {getAllProduct, getProductByPid, getProductsByCategory} from "../../../api/product/productApi.ts";
+import {getProductByPid} from "../../../api/product/productApi.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.tsx";
 import {putCartItem} from "../../../api/cartItem/cartItemApi.ts";
+import ShoppingCheckTopbar from "../../component/ShoppingCheckTopbar";
 
 export default function ProductDetailPage() {
   const [productDto, setProductDto] = useState<ProductDto | undefined>(undefined);
@@ -17,8 +16,6 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
-  const [getAllProductDtoList, setGetAllProductDtoList] = useState<GetAllProductDto[] | undefined>(undefined);
 
   const loginUser = useContext(LoginUserContext);
   const navigate = useNavigate({from: "/product/$productId"});
@@ -29,28 +26,6 @@ export default function ProductDetailPage() {
     const responseData = await getProductByPid(productId);
     setProductDto(responseData);
     setIsLoading(false);
-  }
-
-  const fetchAllProduct = async () => {
-    try {
-      const responseData = await getAllProduct();
-      setGetAllProductDtoList(responseData);
-      navigate({to:"/"})
-      setIsLoading(false);
-    } catch {
-      navigate({to: "/error"});
-    }
-  }
-
-  const fetchProductsByCategory = async (category: string) => {
-    try {
-      setIsLoading(true);
-      const responseData = await getProductsByCategory(category);
-      setGetAllProductDtoList(responseData);
-      setIsLoading(false);
-    } catch {
-      navigate({to: "/error"});
-    }
   }
 
   const handleQuantityMinusOne = () => {
@@ -64,34 +39,6 @@ export default function ProductDetailPage() {
       setQuantity((prevState) => (prevState + 1));
     }
   }
-
-
-  // Handle category selection
-  const handleCategoryChange = async (category: string) => {
-    // Don't reload if same category is selected
-    if (category === selectedCategory) return;
-
-    setSelectedCategory(category);
-
-    try {
-      setIsLoading(true);
-
-      if (category === "ALL") {
-        await fetchAllProduct();
-
-      } else {
-        await fetchProductsByCategory(category);
-      }
-
-      navigate({to:"/"});
-      setIsLoading(false);
-
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      navigate({to: "/error"});
-    }
-  }
-
 
   useEffect(() => {
     fetchProductByPid();
@@ -120,21 +67,11 @@ export default function ProductDetailPage() {
     }
   }
 
-
   return (
     <div className="product-detail-container text-primary">
       <Announcebar/>
-      <TopNavbar
-        onCategoryChange={handleCategoryChange}
-      />
+      <ShoppingCheckTopbar/>
       <div className="flex flex-col lg:flex-row flex-1">
-        {/* Menu - horizontal on mobile, vertical on desktop */}
-        <div className="lg:w-64 lg:flex-shrink-0">
-          {/*add className to fix width on desktop and prevent shrinking*/}
-          <Menu
-            onCategoryChange={handleCategoryChange}
-          />
-        </div>
         {
           productDto && !isLoading
             ? <ProductDetailContent
@@ -148,7 +85,6 @@ export default function ProductDetailPage() {
             />
             : <LoadingContainer/>
         }
-
       </div>
       <FooterBar/>
     </div>
