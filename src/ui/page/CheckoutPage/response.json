@@ -1,0 +1,35 @@
+{
+  "tid": 11,
+  "buyerUid": 1,
+  "datetime": "20250721T14:17:59",
+  "status": "SUCCESS",
+  "total": 1500.00,
+  "items": [
+    {
+      "tpid": 14,
+      "productResponseDto": {
+        "pid": 1,
+        "name": "Beef Mince - Grain Fed | Australia | 300g",
+        "description": "Our Premium Australian Lean Minced Beef features beef naturally reared in open pastures before being finished on no more than 100 days of a grain fed diet.",
+        "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefMince-GrainFed_Australia_300g_Frozen_550x.webp?v=1754465689",
+        "price": 14.70,
+        "stock": 0
+      },
+      "quantity": 10,
+      "subtotal": 147.00
+    },
+    {
+      "tpid": 15,
+      "productResponseDto": {
+        "pid": 2,
+        "name": "Beef Sirloin Steak - Grass Fed | Australia | 250g",
+        "description": "Our 100% Grass Fed Sirloin Steak (also known as Porterhouse) features beef naturally reared in open pastures.",
+        "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/BeefSirloinSteak-GrassFed_Australia_250g_Frozen_550x.webp?v=1754465608",
+        "price": 22.80,
+        "stock": 920
+      },
+      "quantity": 10,
+      "subtotal": 228.00
+    }
+  ]
+}
