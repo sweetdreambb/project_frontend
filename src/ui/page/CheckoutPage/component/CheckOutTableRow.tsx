@@ -1,8 +1,10 @@
+import type {Item} from "../../../../data/transaction/transaction.type.ts";
 interface Props{
   index: number;
+  item: Item;
 }
 
-export default function CheckOutTableRow({index}:Props){
+export default function CheckOutTableRow({index, item}:Props){
   return (
     <tr>
       <th>{index}</th>
@@ -11,20 +13,20 @@ export default function CheckOutTableRow({index}:Props){
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
               <img
-                src="https://themeatclub.com.sg/cdn/shop/files/BeefSirloinSteak-GrassFed_Australia_250g_Frozen_550x.webp?v=1754465608"
+                src={item.productResponseDto.imageUrl}
               />
             </div>
           </div>
           <div>
-            <div className="font-bold">Beef Sirloin Steak - Grass Fed | Australia | 250g</div>
-            <div className="text-sm opacity-50">$20.00</div>
+            <div className="font-bold">{item.productResponseDto.name}</div>
+            <div className="text-sm opacity-50">${item.productResponseDto.price.toLocaleString()}</div>
           </div>
         </div>
       </td>
       <td>
-        100
+        {item.quantity}
       </td>
-      <td className="text-right">$2,000</td>
+      <td className="text-right">${item.subtotal.toLocaleString()}</td>
     </tr>
   );
 }

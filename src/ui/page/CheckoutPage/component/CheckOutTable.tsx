@@ -1,14 +1,18 @@
 import CheckOutTableRow from "./CheckOutTableRow.tsx";
+import type {TransactionDto} from "../../../../data/transaction/transaction.type.ts";
 
-export default function CheckOutTable(){
+interface Props{
+  transactionDto: TransactionDto;
+}
+
+export default function CheckOutTable({transactionDto}:Props){
   return (
     <div className="overflow-x-auto">
       <table className="table">
         {/* head */}
         <thead>
         <tr>
-          <th>
-          </th>
+          <th/>
           <th>Name</th>
           <th>Quantity</th>
           <th className="text-right">Sub-total</th>
@@ -16,10 +20,11 @@ export default function CheckOutTable(){
         </thead>
         <tbody>
         {
-          Array.from({length:10}).map((_,i)=>(
+          transactionDto.items.map((item,i=1)=>(
             <CheckOutTableRow
-              key={i}
+              key={item.tpid}
               index={++i}
+              item={item}
             />
             )
           )
@@ -31,7 +36,7 @@ export default function CheckOutTable(){
           <th className="text-primary text-2xl">Total</th>
           <th></th>
           <th></th>
-          <th className="text-primary text-2xl text-right">$20,000</th>
+          <th className="text-primary text-2xl text-right">${transactionDto.total.toLocaleString()}</th>
           <th></th>
         </tr>
         </tfoot>

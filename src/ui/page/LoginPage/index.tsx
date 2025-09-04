@@ -1,4 +1,3 @@
-import TopNavbar from "../../component/TopNavbar";
 import Announcebar from "../../component/Announcebar";
 import FooterBar from "../../component/FooterBar";
 import {type FormEvent, useContext, useEffect, useState} from "react";
@@ -6,6 +5,7 @@ import {signInWithEmailAndPassword, signInWithGoogle} from "../../../authService
 import {useNavigate, useRouter} from "@tanstack/react-router";
 import {LoginUserContext} from "../../../context/LoginUserContext.tsx";
 import {GoogleLoginButton} from "react-social-login-buttons";
+import ShoppingCheckTopbar from "../../component/ShoppingCheckTopbar";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function LoginPage() {
   return (
     <div>
       <Announcebar/>
-      <TopNavbar/>
+      <ShoppingCheckTopbar/>
       <div className="flex justify-center mx-5 my-15 text-primary">
         <form
           className="fieldset bg-base-200 border-base-300 rounded-box w-3xl border px-4 py-10 text-2xl"

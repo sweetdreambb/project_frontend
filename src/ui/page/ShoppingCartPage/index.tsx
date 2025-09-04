@@ -94,14 +94,14 @@ export default function ShoppingCartPage() {
           hasValidDelivery
             ? (
               <button
-                className="btn btn-success mt-4 text-2xl w-full my-4 text-black"
+                className="btn btn-success text-2xl w-full my-4 text-black"
                 type="submit"
               >
                 Checkout
               </button>
             ) : (
               <button
-                className="btn btn-disabled mt-4 text-2xl w-full my-4 text-black"
+                className="btn btn-disabled text-2xl w-full my-4 text-black"
               >
                 Choose a date and time
               </button>
