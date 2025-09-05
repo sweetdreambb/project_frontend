@@ -4,11 +4,13 @@ import {useContext, useEffect, useState} from "react";
 import type {ProductDto} from "../../../data/product/product.type.ts";
 import ProductDetailContent from "./component/ProductDetailContent.tsx";
 import LoadingContainer from "../../component/LoadingContainer";
-import {useNavigate, useParams} from "@tanstack/react-router";
+import {Link, useNavigate, useParams} from "@tanstack/react-router";
 import {getProductByPid} from "../../../api/product/productApi.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.tsx";
 import {putCartItem} from "../../../api/cartItem/cartItemApi.ts";
 import ShoppingCheckTopbar from "../../component/ShoppingCheckTopbar";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDetailPage() {
   const [productDto, setProductDto] = useState<ProductDto | undefined>(undefined);
@@ -71,7 +73,14 @@ export default function ProductDetailPage() {
     <div className="product-detail-container text-primary">
       <Announcebar/>
       <ShoppingCheckTopbar/>
+      <Link
+        to="/"
+        className="mx-10 py-4 text-primary w-full flex justify-start items-center"
+      >
+        <FontAwesomeIcon icon={faAngleLeft}/>Continue shopping
+      </Link>
       <div className="flex flex-col lg:flex-row flex-1">
+
         {
           productDto && !isLoading
             ? <ProductDetailContent

@@ -1,5 +1,4 @@
 import QuantitySelector from "../../../component/QuantitySelector";
-import {Link} from "@tanstack/react-router";
 import type {ProductDto} from "../../../../data/product/product.type.ts";
 import StockAvailableTag from "../../../component/StockAvailableTag";
 import StockOutTag from "../../../component/StockOutTag";
@@ -37,21 +36,17 @@ export default function ProductDetailContent({
         ? (
           <button
             className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
-            style={{backgroundColor: '#304d6e',}}
+            style={{backgroundColor: '#304d6e', opacity: 0.5}}
           >
-            <Link to="/shoppingcart">
               Processing...
-            </Link>
           </button>
         ) : isSuccess
         ?(
             <button
               className="btn btn-disabled btn-block text-white text-base lg:text-lg rounded-lg"
-              style={{backgroundColor: '#304d6e',}}
+              style={{backgroundColor: '#304d6e', opacity: 0.5}}
             >
-              <Link to="/shoppingcart">
                 Added to Cart!
-              </Link>
             </button>
           ):
         (
@@ -60,9 +55,7 @@ export default function ProductDetailContent({
             style={{backgroundColor: '#304d6e',}}
             onClick={handlePutCartItem}
           >
-            <Link to="/shoppingcart">
               Add to cart
-            </Link>
           </button>
         )
   )
@@ -73,12 +66,12 @@ export default function ProductDetailContent({
         <img
           src={productDto.imageUrl}
           className="w-64  lg:w-96 xl:w-[400px] rounded-lg shadow-2xl"
+          alt={productDto.name}
         />
         <div className="ml-0 lg:ml-10 mt-6 lg:mt-0">
           <h1 className="text-2xl lg:text-3xl font-bold">{productDto.name}</h1>
           <h2 className="text-xl lg:text-2xl font-bold pt-3">${productDto.price.toLocaleString()}</h2>
           <p className="py-4 lg:py-6 text-sm lg:text-base">
-
             {productDto.description}
           </p>
           {productDto.stock > 0
@@ -87,11 +80,11 @@ export default function ProductDetailContent({
             ) : (
               <StockOutTag/>
             )}
-
           <QuantitySelector
             quantity={quantity}
             handleQuantityMinusOne={handleQuantityMinusOne}
             handleQuantityPlusOne={handleQuantityPlusOne}
+            stock={productDto.stock}
           />
           {renderAddToCartBtn()}
         </div>

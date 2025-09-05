@@ -10,6 +10,7 @@ import {Link, useNavigate} from "@tanstack/react-router";
 import {getUserCart} from "../../../api/cartItem/cartItemApi.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft} from "@fortawesome/free-solid-svg-icons";
+import {postTransaction} from "../../../api/transaction/transactionApi.ts";
 
 export default function ShoppingCartPage() {
 
@@ -19,6 +20,7 @@ export default function ShoppingCartPage() {
   const [getCartItemDtoList, setGetCartItemDtoList] = useState<GetCartItemDto[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [hasValidDelivery, setHasValidDelivery] = useState(false);
+  const [isCheckingout, setIsCheckingout] = useState(false);
 
   const fetchUserCart = async () => {
     try {
@@ -42,11 +44,22 @@ export default function ShoppingCartPage() {
     )
   }
 
-  const handleDelete = (pid:number)=>{
+  const handleDelete = (pid: number) => {
     setGetCartItemDtoList(
-      getCartItemDtoList?.filter((dto)=>(
-        dto.pid!=pid
+      getCartItemDtoList?.filter((dto) => (
+        dto.pid != pid
       ))
+    )
+  }
+
+  const handleCheckout = async () => {
+    setIsCheckingout(true);
+    const responseData = await postTransaction();
+    navigate(
+      {
+        to: "/checkout/$transactionId",
+        params: {transactionId: responseData.tid.toString()}
+      }
     )
   }
 
@@ -57,7 +70,6 @@ export default function ShoppingCartPage() {
       fetchUserCart();
     }
   }, [loginUser]);
-
 
 
   const calculateTotalSales =
@@ -79,7 +91,7 @@ export default function ShoppingCartPage() {
     }
 
     if (getCartItemDtoList.length === 0) {
-      return <h1>Your cart is empty</h1>;
+      return <h1 className="text-primary font-bold italic text-xl">Your cart is empty</h1>;
     }
 
     return (
@@ -96,6 +108,8 @@ export default function ShoppingCartPage() {
               <button
                 className="btn btn-success text-2xl w-full my-4 text-black"
                 type="submit"
+                onClick={handleCheckout}
+                disabled={isCheckingout}
               >
                 Checkout
               </button>
@@ -127,23 +141,29 @@ export default function ShoppingCartPage() {
             ? <p>Congrats! You have unlocked Free Shipping!</p>
             : getCartItemDtoList && !isLoading && estTotal && estTotal < 500
               ? <p>Add ${balance && balance.toLocaleString()} to unlock Free Shipping</p>
-              : <span className="loading loading-dots loading-xs"></span>
+              : getCartItemDtoList?.length === 0
+                ? <p>Add $500 to unlock Free Shipping</p>
+                : <span className="loading loading-dots loading-xs"></span>
         }
         {
-          estTotal && estTotal < 500 && <p className="font-bold">$500</p>
+          estTotal && estTotal < 500 || getCartItemDtoList?.length === 0
+          && <p className="font-bold">$500</p>
         }
       </div>
       <div className="px-10 flex justify-center my-4">
         {
-          estTotal &&
+          estTotal
+            ?
             <progress className="progress progress-success w-full" value={Math.min(500, estTotal)} max="500"></progress>
+            : getCartItemDtoList?.length === 0
+            && <progress className="progress progress-success w-full" value={500} max="500"></progress>
         }
       </div>
       <Link
         to="/"
         className="mx-10 pb-4 text-primary w-full flex justify-start items-center"
       >
-        <FontAwesomeIcon icon={faAngleLeft} />Continue shopping
+        <FontAwesomeIcon icon={faAngleLeft}/>Continue shopping
       </Link>
 
       {/* Main content area with responsive layout */}
@@ -157,7 +177,6 @@ export default function ShoppingCartPage() {
         <div className="flex-1">
           {renderShoppingCart()}
         </div>
-
       </div>
       <FooterBar/>
     </div>

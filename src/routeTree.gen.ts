@@ -16,7 +16,6 @@ import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ErrorIndexRouteImport } from './routes/error/index'
 import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
 import { Route as CheckoutTransactionIdRouteImport } from './routes/checkout/$transactionId'
-import { Route as CategoryCategoryRouteImport } from './routes/category/$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -53,15 +52,9 @@ const CheckoutTransactionIdRoute = CheckoutTransactionIdRouteImport.update({
   path: '/checkout/$transactionId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
-  id: '/category/$category',
-  path: '/category/$category',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/category/$category': typeof CategoryCategoryRoute
   '/checkout/$transactionId': typeof CheckoutTransactionIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/error': typeof ErrorIndexRoute
@@ -71,7 +64,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/category/$category': typeof CategoryCategoryRoute
   '/checkout/$transactionId': typeof CheckoutTransactionIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/error': typeof ErrorIndexRoute
@@ -82,7 +74,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/category/$category': typeof CategoryCategoryRoute
   '/checkout/$transactionId': typeof CheckoutTransactionIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/error/': typeof ErrorIndexRoute
@@ -94,7 +85,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/category/$category'
     | '/checkout/$transactionId'
     | '/product/$productId'
     | '/error'
@@ -104,7 +94,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/category/$category'
     | '/checkout/$transactionId'
     | '/product/$productId'
     | '/error'
@@ -114,7 +103,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/category/$category'
     | '/checkout/$transactionId'
     | '/product/$productId'
     | '/error/'
@@ -125,7 +113,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CategoryCategoryRoute: typeof CategoryCategoryRoute
   CheckoutTransactionIdRoute: typeof CheckoutTransactionIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
   ErrorIndexRoute: typeof ErrorIndexRoute
@@ -185,19 +172,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutTransactionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/category/$category': {
-      id: '/category/$category'
-      path: '/category/$category'
-      fullPath: '/category/$category'
-      preLoaderRoute: typeof CategoryCategoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CategoryCategoryRoute: CategoryCategoryRoute,
   CheckoutTransactionIdRoute: CheckoutTransactionIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
   ErrorIndexRoute: ErrorIndexRoute,
