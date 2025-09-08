@@ -1,1 +1,8 @@
-{"pid":5,"name":"Pork Mince - Free Range | Australia | 500g | Frozen","description":"Our Free Range Pork Mince is sourced from Queensland, where ethical farming methods and tailored diets create great tasting pork. Best cooked in a stir fry. Check out our Mini Gluten Free Pork Burgers recipe for inspiration!","imageUrl":"https://themeatclub.com.sg/cdn/shop/files/PorkMince-FreeRange_Australia_500g_Frozen_800x.webp?v=1754466596","price":18.00,"stock":1000}
+{
+  "pid": 5,
+  "name": "Pork Mince - Free Range | Australia | 500g | Frozen",
+  "description": "Our Free Range Pork Mince is sourced from Queensland, where ethical farming methods and tailored diets create great tasting pork. Best cooked in a stir fry. Check out our Mini Gluten Free Pork Burgers recipe for inspiration!",
+  "imageUrl": "https://themeatclub.com.sg/cdn/shop/files/PorkMince-FreeRange_Australia_500g_Frozen_800x.webp?v=1754466596",
+  "price": 18.00,
+  "stock": 1000
+}

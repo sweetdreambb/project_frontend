@@ -1,8 +1,9 @@
 import type {GetCartItemDto} from "../../data/cart/cartItem.type.ts";
 import axios from "axios";
 import {getAuthConfig} from "../../authService/FirebaseAuthService.ts";
+import getEnvConfig from "../../config/env/EnvConfig.ts";
 
-const baseUrl="http://localhost:8080";
+const baseUrl=getEnvConfig().baseUrl;
 
 export async function getUserCart(){
   const response = await axios.get<GetCartItemDto[]>(

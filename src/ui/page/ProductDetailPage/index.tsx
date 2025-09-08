@@ -28,6 +28,7 @@ export default function ProductDetailPage() {
     const responseData = await getProductByPid(productId);
     setProductDto(responseData);
     setIsLoading(false);
+    document.title=responseData.name;
   }
 
   const handleQuantityMinusOne = () => {
