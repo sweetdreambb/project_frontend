@@ -27,6 +27,7 @@ export default function ShoppingCartPage() {
       const responseData = await getUserCart();
       setGetCartItemDtoList(responseData);
       setIsLoading(false);
+      document.title="My Cart";
     } catch {
       navigate({to: "/error"})
     }

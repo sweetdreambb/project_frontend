@@ -11,6 +11,7 @@ export default function ThankYouPage() {
     if (countdown === 0) {
       navigate({to: "/"})
     }
+    document.title="Thank You!";
     setTimeout(() => {
       setCountdown((prev) => (prev - 1));
     }, 1000)

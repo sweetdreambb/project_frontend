@@ -19,6 +19,7 @@ export default function CheckoutPage() {
    const responseData = await getTransaction(transactionId);
    setTransactionDto(responseData);
    setIsLoading(false);
+    document.title="Check Out";
   }
 
   const handleCheckout = async ()=>{

@@ -24,6 +24,7 @@ export default function ProductListingPage() {
       const responseData = await getAllProduct();
       setGetAllProductDtoList(responseData);
       setIsLoading(false);
+      document.title="My Meat Shop";
     } catch {
       navigate({to: "/error"});
     }
